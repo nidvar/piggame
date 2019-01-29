@@ -1,15 +1,52 @@
 html{
 	margin:0;
 }
+h2{
+	margin:0;
+	padding:0;
+}
 body{
 	margin:0;
 	text-align:center;
 	font-family: 'Sarabun', sans-serif;
 }
 .container{
-	
+	margin:auto;
+	background-color:skyblue;
+	width:70%;
 }
-.dicebox{
+.box{
 	height:300px;
+	margin:5px;
 	background-color:wheat;
+	border:1px solid black;
+	width:300px;
+	float:left;
+}
+.box2{
+	height:150px;
+	margin:5px;
+	background-color:wheat;
+	border:1px solid black;
+	width:300px;
+	float:left;
+}
+h2{
+	margin-top:20px;
+}
+.box img{
+	margin-top:100px;
+}
+.clear{
+	clear:both;
+}
+.globalscore{
+	font-size:100px;
+	font-weight:lighter;
+	margin-top:20px;
+}
+.currentscore{
+	font-size:50px;
+	font-weight:lighter;
+	margin-top:30px;
 }
