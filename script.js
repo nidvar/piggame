@@ -23,6 +23,7 @@ let player1totalscore = 0;
 let player2totalscore = 0;
 let diceScore = 0;
 
+
 //players
 let player = 1;
 
@@ -31,6 +32,7 @@ const p1design = document.querySelectorAll('.boxp1');
 const p2design = document.querySelectorAll('.boxp2');
 
 //functions ~
+
 function rolldice(){
 	let dice = Math.floor(Math.random()*6 +1);
 	theDice.style.display = 'inline-block';
@@ -43,8 +45,16 @@ function rolldice(){
 		player2diceScore.innerHTML = diceScore;
 	} else if(dice === 1){
 		switchPlayer();
+	} 
+
+	if(player1totalscore >= 100){
+		endGame();
+		alert('player 1 wins');
 	}
-	console.log(diceScore)
+	if(player2totalscore >= 100){
+		endGame();
+		alert('player 2 wins');
+	}
 }
 
 function switchPlayer(){
@@ -79,6 +89,9 @@ function newGame(){
 	p2design[1].classList.remove('playerturn');
 	p1design[0].classList.add('playerturn');
 	p1design[1].classList.add('playerturn');
+	rolldicebutton.style.display = 'block';
+	holdbutton.style.display = 'block';
+	theDice.style.display = 'inline-block';
 }
 
 function holdscore(){
@@ -90,4 +103,14 @@ function holdscore(){
 		player2scorebox.innerHTML = player2totalscore;
 	}
 	switchPlayer();
+}
+function endGame(){
+	rolldicebutton.style.display = 'none';
+	holdbutton.style.display = 'none';
+	theDice.style.display = 'none';
+
+	p2design[0].classList.remove('playerturn');
+	p2design[1].classList.remove('playerturn');
+	p1design[0].classList.remove('playerturn');
+	p1design[1].classList.remove('playerturn');
 }
