@@ -1,49 +1,93 @@
-// Player score number
-const p1score = document.querySelector('.p1score');
-const p2score = document.querySelector('.p2score');
-const p1dice = document.querySelector('.p1dice');
-const p2dice = document.querySelector('.p2dice');
+//buttons ~
+const startNewGame = document.querySelector('.newgame');
+startNewGame.addEventListener('click', newGame);
 
-//Buttons
-const newgame = document.querySelector('.newgame');
-const rolldice = document.querySelector('.rolldice');
-const hold = document.querySelector('.hold');
+const holdbutton = document.querySelector('.hold');
+holdbutton.addEventListener('click', holdscore);
+
+const rolldicebutton = document.querySelector('.rolldice');
+rolldicebutton.addEventListener('click', rolldice);
+
+//scoreboard
+let player1scorebox = document.querySelector('.p1score');
+let player2scorebox = document.querySelector('.p2score');
+
+let player1diceScore = document.querySelector('.p1dice');
+let player2diceScore = document.querySelector('.p2dice');
 
 //dice picture
-const dicepic = document.querySelector('.dicepicture');
+const theDice = document.querySelector('.dicepicture');
 
-//Player scores
+//scores ~
+let player1totalscore = 0;
+let player2totalscore = 0;
 let diceScore = 0;
-let player1total = 0;
 
+//players
+let player = 1;
 
+//design~
+const p1design = document.querySelectorAll('.boxp1');
+const p2design = document.querySelectorAll('.boxp2');
 
-//functions
-function startnewgame(){
-	p1score.innerHTML = 0;
-	p2score.innerHTML = 0;
-	p1dice.innerHTML = 0;
-	p2dice.innerHTML = 0;
-	dicepic.style.display = 'none';
-	diceScore = 0;
-}
-function rollthedice(){
+//functions ~
+function rolldice(){
 	let dice = Math.floor(Math.random()*6 +1);
-	dicepic.style.display = 'inline-block';
-	dicepic.src = 'images/dice'+dice+'.png';
-	diceScore = diceScore + dice;
-	p1dice.innerHTML = diceScore;
+	theDice.style.display = 'inline-block';
+	theDice.src = 'images/dice'+dice+'.png'
+	if(player === 1 && dice !=1){
+		diceScore = diceScore + dice;
+		player1diceScore.innerHTML = diceScore;
+	} else if(player === 2 && dice !=1){
+		diceScore = diceScore + dice;
+		player2diceScore.innerHTML = diceScore;
+	} else if(dice === 1){
+		switchPlayer();
+	}
+	console.log(diceScore)
 }
-function holdscore(){
-	player1total = diceScore;
-	p1score.innerHTML = player1total;
+
+function switchPlayer(){
+	if(player === 1){
+		p1design[0].classList.remove('playerturn');
+		p1design[1].classList.remove('playerturn');
+		p2design[0].classList.add('playerturn');
+		p2design[1].classList.add('playerturn');
+		player = 2;
+	} else if(player === 2){
+		p2design[0].classList.remove('playerturn');
+		p2design[1].classList.remove('playerturn');
+		p1design[0].classList.add('playerturn');
+		p1design[1].classList.add('playerturn');
+		player = 1;
+	}
 	diceScore = 0;
-	p1dice.innerHTML = 0;
+	player1diceScore.innerHTML = 0;
+	player2diceScore.innerHTML = 0;
 }
 
+function newGame(){
+	player1totalscore = 0;
+	player2totalscore = 0;
+	diceScore = 0;
+	player1scorebox.innerHTML = player1totalscore;
+	player2scorebox.innerHTML = player2totalscore;
+	player1diceScore.innerHTML = 0;
+	player2diceScore.innerHTML = 0;
+	theDice.style.display = 'none';
+	p2design[0].classList.remove('playerturn');
+	p2design[1].classList.remove('playerturn');
+	p1design[0].classList.add('playerturn');
+	p1design[1].classList.add('playerturn');
+}
 
-
-//calling functions
-newgame.addEventListener('click',startnewgame);
-rolldice.addEventListener('click',rollthedice);
-hold.addEventListener('click',holdscore);
+function holdscore(){
+	if(player === 1){
+		player1totalscore = player1totalscore + diceScore;
+		player1scorebox.innerHTML = player1totalscore;
+	} else if(player === 2){
+		player2totalscore = player2totalscore + diceScore;
+		player2scorebox.innerHTML = player2totalscore;
+	}
+	switchPlayer();
+}
