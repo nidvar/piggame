@@ -8,6 +8,14 @@ holdbutton.addEventListener('click', holdscore);
 const rolldicebutton = document.querySelector('.rolldice');
 rolldicebutton.addEventListener('click', rolldice);
 
+const usethisscore = document.getElementById('usethisscore');
+usethisscore.addEventListener('click', playerScore)
+
+//winning score
+let winningScore = 100;
+let playerinput = document.getElementById('playerinput');
+let original100 = document.getElementById('original');
+
 //scoreboard
 let player1scorebox = document.querySelector('.p1score');
 let player2scorebox = document.querySelector('.p2score');
@@ -33,8 +41,8 @@ let player = 1;
 const p1design = document.querySelectorAll('.boxp1');
 const p2design = document.querySelectorAll('.boxp2');
 
-//functions ~
 
+//functions ~
 function rolldice(){
 	let dice = Math.floor(Math.random()*6 +1);
 	theDice.style.display = 'inline-block';
@@ -71,11 +79,11 @@ function rolldice(){
 
 	//*************************
 
-	if(player1totalscore >= 100){
+	if(player1totalscore >= winningScore){
 		endGame();
 		alert('player 1 wins');
 	}
-	if(player2totalscore >= 100){
+	if(player2totalscore >= winningScore){
 		endGame();
 		alert('player 2 wins');
 	}
@@ -139,3 +147,17 @@ function endGame(){
 	p1design[0].classList.remove('playerturn');
 	p1design[1].classList.remove('playerturn');
 }
+function playerScore(){
+	if(Number.isInteger(parseFloat(playerinput.value))){
+		original100.style.color = 'white';
+		let x = parseFloat(playerinput.value);
+		winningScore = x;
+		alert('This will start a new game');
+		let title = document.getElementById('winningscoreinput').innerHTML = winningScore;
+	} else {
+		alert('That is not a number');
+		document.getElementById('playerinput').value = '';
+	}
+
+}
+newGame();
