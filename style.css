@@ -38,3 +38,7 @@ html, body{
 .playerturn{
 	background-color:skyblue;
 }
+ul {
+    text-align: center;
+    list-style-position: inside;
+}
