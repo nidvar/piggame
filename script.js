@@ -23,6 +23,8 @@ let player1totalscore = 0;
 let player2totalscore = 0;
 let diceScore = 0;
 
+//double six
+let sixone = 0;
 
 //players
 let player = 1;
@@ -46,6 +48,28 @@ function rolldice(){
 	} else if(dice === 1){
 		switchPlayer();
 	} 
+
+	//*************************
+
+	if(dice === 6){
+		sixone++;
+	} else{
+		sixone = 0;
+	}
+
+	if(dice === 6 && sixone === 2){
+		if(player === 1){
+			player1totalscore = 0;
+			player1scorebox.innerHTML = 0;
+			switchPlayer();
+		} else if (player === 2){
+			player2totalscore = 0;
+			player2scorebox.innerHTML = 0;
+			switchPlayer();
+		}
+	}
+
+	//*************************
 
 	if(player1totalscore >= 100){
 		endGame();
@@ -74,6 +98,7 @@ function switchPlayer(){
 	diceScore = 0;
 	player1diceScore.innerHTML = 0;
 	player2diceScore.innerHTML = 0;
+	sixone = 0;
 }
 
 function newGame(){
