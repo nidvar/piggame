@@ -25,6 +25,7 @@ let player2diceScore = document.querySelector('.p2dice');
 
 //dice picture
 const theDice = document.querySelector('.dicepicture');
+const theDice2 = document.querySelector('.dicetwo');
 
 //scores ~
 let player1totalscore = 0;
@@ -44,28 +45,36 @@ const p2design = document.querySelectorAll('.boxp2');
 
 //functions ~
 function rolldice(){
+
+	let diceSecond = Math.floor(Math.random()*6+1)
+
 	let dice = Math.floor(Math.random()*6 +1);
 	theDice.style.display = 'inline-block';
 	theDice.src = 'images/dice'+dice+'.png'
-	if(player === 1 && dice !=1){
-		diceScore = diceScore + dice;
+	theDice2.src = 'images/dice'+diceSecond+'.png'
+
+	if(player === 1 && dice !=1 && diceSecond !=1){
+		diceScore = diceScore + dice +diceSecond;
 		player1diceScore.innerHTML = diceScore;
-	} else if(player === 2 && dice !=1){
-		diceScore = diceScore + dice;
+	} else if(player === 2 && dice !=1 && diceSecond !=1){
+		diceScore = diceScore + dice +diceSecond;
 		player2diceScore.innerHTML = diceScore;
-	} else if(dice === 1){
+	} else if(dice === 1 || diceSecond === 1){
 		switchPlayer();
 	} 
 
 	//*************************
 
-	if(dice === 6){
+	if(dice === 6 || diceSecond === 6){
 		sixone++;
 	} else{
 		sixone = 0;
 	}
+	if(dice === 6 && diceSecond === 6){
+		switchPlayer();
+	}
 
-	if(dice === 6 && sixone === 2){
+	if(dice === 6 && sixone === 2 || diceSecond === 6 && sixone === 2){
 		if(player === 1){
 			player1totalscore = 0;
 			player1scorebox.innerHTML = 0;
