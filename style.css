@@ -50,7 +50,16 @@ a:link{
 	padding:4px;
 	border-radius:5px;
 	border:1px solid black;
+	color:black;
 }
 a:visited{
 	color:black;
+}
+li{
+	margin:10px 0 10px 0;
+	text-align:left;
+}
+#rules{
+	width:700px;
+	margin:auto;
 }
