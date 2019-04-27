@@ -1,185 +1,106 @@
-//buttons ~
-const startNewGame = document.querySelector('.newgame');
-startNewGame.addEventListener('click', newGame);
-
-const holdbutton = document.querySelector('.hold');
-holdbutton.addEventListener('click', holdscore);
-
-const rolldicebutton = document.querySelector('.rolldice');
-rolldicebutton.addEventListener('click', rolldice);
-
-const usethisscore = document.getElementById('usethisscore');
-usethisscore.addEventListener('click', enter_score);
-
-//winning score
-let winningScore = 100;
-let playerinput = document.getElementById('playerinput');
-let original100 = document.getElementById('original');
-
-//scoreboard
-let player1scorebox = document.querySelector('.p1score');
-let player2scorebox = document.querySelector('.p2score');
-
-let player1diceScore = document.querySelector('.p1dice');
-let player2diceScore = document.querySelector('.p2dice');
-
-//dice picture
-const theDice = document.querySelector('.dicepicture');
-const theDice2 = document.querySelector('.dicetwo');
-
-//scores ~
-let player1totalscore = 0;
-let player2totalscore = 0;
-let diceScore = 0;
-
-//double six
-let sixone = 0;
-
-//players
+let score = 0;
 let player = 1;
+let p1score = 0;
+let p2score = 0;
 
-//design~
-const p1design = document.querySelectorAll('.boxp1');
-const p2design = document.querySelectorAll('.boxp2');
+let winning_score = 100;
 
-
-//functions ~
-function rolldice(){
-
-	let diceSecond = Math.floor(Math.random()*6+1)
-
-	let dice = Math.floor(Math.random()*6 +1);
-	theDice.style.display = 'inline-block';
-	theDice.src = 'images/dice'+dice+'.png'
-	theDice2.src = 'images/dice'+diceSecond+'.png'
-
-	if(player === 1 && dice !=1 && diceSecond !=1){
-		diceScore = diceScore + dice +diceSecond;
-		player1diceScore.innerHTML = diceScore;
-	} else if(player === 2 && dice !=1 && diceSecond !=1){
-		diceScore = diceScore + dice +diceSecond;
-		player2diceScore.innerHTML = diceScore;
-	} else if(dice === 1 || diceSecond === 1){
-		switchPlayer();
-	} 
-
-	//*************************
-
-	if(dice === 6 || diceSecond === 6){
-		sixone++;
-	} else{
-		sixone = 0;
-	}
-	if(dice === 6 && diceSecond === 6){
-		switchPlayer();
-	}
-
-	if(dice === 6 && sixone === 2 || diceSecond === 6 && sixone === 2){
-		if(player === 1){
-			player1totalscore = 0;
-			player1scorebox.innerHTML = 0;
-			switchPlayer();
-		} else if (player === 2){
-			player2totalscore = 0;
-			player2scorebox.innerHTML = 0;
-			switchPlayer();
-		}
-	}
-
-	//*************************
-
-	if(player1totalscore >= winningScore){
-		endGame();
-		alert('player 1 wins');
-	}
-	if(player2totalscore >= winningScore){
-		endGame();
-		alert('player 2 wins');
-	}
-}
-
-function switchPlayer(){
-	if(player === 1){
-		p1design[0].classList.remove('playerturn');
-		p1design[1].classList.remove('playerturn');
-		p2design[0].classList.add('playerturn');
-		p2design[1].classList.add('playerturn');
-		player = 2;
-	} else if(player === 2){
-		p2design[0].classList.remove('playerturn');
-		p2design[1].classList.remove('playerturn');
-		p1design[0].classList.add('playerturn');
-		p1design[1].classList.add('playerturn');
-		player = 1;
-	}
-	diceScore = 0;
-	player1diceScore.innerHTML = 0;
-	player2diceScore.innerHTML = 0;
-	sixone = 0;
-}
-
-function newGame(){
-	player1totalscore = 0;
-	player2totalscore = 0;
-	diceScore = 0;
-	player1scorebox.innerHTML = player1totalscore;
-	player2scorebox.innerHTML = player2totalscore;
-	player1diceScore.innerHTML = 0;
-	player2diceScore.innerHTML = 0;
-	theDice.style.display = 'none';
-	p2design[0].classList.remove('playerturn');
-	p2design[1].classList.remove('playerturn');
-	p1design[0].classList.add('playerturn');
-	p1design[1].classList.add('playerturn');
-	rolldicebutton.style.display = 'block';
-	holdbutton.style.display = 'block';
-	theDice.style.display = 'inline-block';
-}
-
-function holdscore(){
-	if(player === 1){
-		player1totalscore = player1totalscore + diceScore;
-		player1scorebox.innerHTML = player1totalscore;
-	} else if(player === 2){
-		player2totalscore = player2totalscore + diceScore;
-		player2scorebox.innerHTML = player2totalscore;
-	}
-	if(player1totalscore >= winningScore){
-		endGame();
-		alert('player 1 wins');
-	}
-	if(player2totalscore >= winningScore){
-		endGame();
-		alert('player 2 wins');
-	}
-	switchPlayer();
-}
-function endGame(){
-	rolldicebutton.style.display = 'none';
-	holdbutton.style.display = 'none';
-	theDice.style.display = 'none';
-
-	p2design[0].classList.remove('playerturn');
-	p2design[1].classList.remove('playerturn');
-	p1design[0].classList.remove('playerturn');
-	p1design[1].classList.remove('playerturn');
-}
-function playerScore(){
-	if(Number.isInteger(parseFloat(playerinput.value))){
-		original100.style.color = 'white';
-		let x = parseFloat(playerinput.value);
-		winningScore = x;
-		alert('This will start a new game');
-		let title = document.getElementById('winningscoreinput').innerHTML = winningScore;
+const custom_winning_score = ()=>{
+	new_game();
+	if(Number.isInteger(parseFloat(document.querySelector('#playerinput').value)) === true){
+		winning_score = document.querySelector('#playerinput').value;
+		document.querySelectorAll('.winningscore')[0].innerHTML = `First player to ${winning_score} wins`;
+		document.querySelectorAll('.winningscore')[1].innerHTML = `First player to ${winning_score} wins`;
 	} else {
-		alert('That is not a number');
-		document.getElementById('playerinput').value = '';
+		alert('This is not a number');
+	}
+	document.querySelector('#playerinput').value = '';
+}
+
+const roll_dice = ()=>{
+	const dice1 = Math.floor(Math.random()*6 +1);
+	const dice2 = Math.floor(Math.random()*6 +1);
+	document.querySelector('.dicepicture').src = `images/dice${dice1}.png`
+	document.querySelector('.dicetwo').src = `images/dice${dice2}.png`
+
+	score = score + dice1+dice2;
+	if(player === 1){
+		document.querySelector('.p1dice').innerHTML = score;
+	}else if(player === 2){
+		document.querySelector('.p2dice').innerHTML = score;
 	}
 
+	if(dice1 === 1||dice2 === 1){
+		change_player();
+	}
 }
-function enter_score(){
-	newGame();
-	winningScore = document.getElementById('playerinput').value;
-	document.getElementById('winningscore').innerHTML = `First to ${winningScore} wins.`
+
+const change_player = ()=>{
+	score = 0;
+	if(player === 1){
+		document.querySelector('.p1dice').innerHTML = 0;
+		player = 2
+		document.querySelectorAll('.boxp2')[0].classList.add('playerturn');
+		document.querySelectorAll('.boxp2')[1].classList.add('playerturn');
+
+		document.querySelectorAll('.boxp1')[0].classList.remove('playerturn');
+		document.querySelectorAll('.boxp1')[1].classList.remove('playerturn');
+	}else if(player === 2){
+		document.querySelector('.p2dice').innerHTML = 0;
+		player = 1
+		document.querySelectorAll('.boxp1')[0].classList.add('playerturn');
+		document.querySelectorAll('.boxp1')[1].classList.add('playerturn');
+
+		document.querySelectorAll('.boxp2')[0].classList.remove('playerturn');
+		document.querySelectorAll('.boxp2')[1].classList.remove('playerturn');
+	}
 }
-newGame();
+
+const hold_score = ()=>{
+	if(player === 1){
+		p1score = p1score + score;
+		document.querySelector('.p1score').innerHTML = p1score;
+	}else if(player === 2){
+		p2score = p2score + score;
+		document.querySelector('.p2score').innerHTML = p2score;
+	}
+	change_player();
+
+	if(p1score >=winning_score){
+		end_game();
+	}else if(p2score >=winning_score){
+		end_game();
+	}
+}
+
+const end_game = ()=>{
+	if(p1score >= winning_score){
+		alert('player 1 wins');
+	} else if (p2score >= winning_score){
+		alert('player 2 wins');
+	}
+	document.querySelector('.rolldice').classList.add = 'hidden';
+	document.querySelector('.hold').classList.add = 'hidden';
+}
+
+const new_game = ()=>{
+	score = 0;
+	player = 1;
+	p1score = 0;
+	p2score = 0;
+
+	document.querySelector('.p1score').innerHTML = 0;
+	document.querySelector('.p2score').innerHTML = 0;
+	document.querySelector('.p1dice').innerHTML = 0;
+	document.querySelector('.p2dice').innerHTML = 0;
+
+	document.querySelector('.rolldice').classList.remove = 'hidden';
+	document.querySelector('.hold').classList.remove = 'hidden';
+}
+
+document.querySelector('.rolldice').addEventListener('click', roll_dice);
+document.querySelector('.hold').addEventListener('click', hold_score);
+document.querySelector('.newgame').addEventListener('click', new_game);
+document.querySelector('#usethisscore').addEventListener('click', custom_winning_score);
+
+new_game();
