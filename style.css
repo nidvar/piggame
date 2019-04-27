@@ -3,6 +3,10 @@ html, body{
 	margin:0;
 	font-family: 'Montserrat', sans-serif;
 }
+#top-nav{
+	height:50px;
+	background-color:black;
+}
 .container{
 	height:100%;
 	width:70%;
