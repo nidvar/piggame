@@ -9,7 +9,7 @@ const rolldicebutton = document.querySelector('.rolldice');
 rolldicebutton.addEventListener('click', rolldice);
 
 const usethisscore = document.getElementById('usethisscore');
-usethisscore.addEventListener('click', playerScore)
+usethisscore.addEventListener('click', enter_score);
 
 //winning score
 let winningScore = 100;
@@ -144,6 +144,14 @@ function holdscore(){
 		player2totalscore = player2totalscore + diceScore;
 		player2scorebox.innerHTML = player2totalscore;
 	}
+	if(player1totalscore >= winningScore){
+		endGame();
+		alert('player 1 wins');
+	}
+	if(player2totalscore >= winningScore){
+		endGame();
+		alert('player 2 wins');
+	}
 	switchPlayer();
 }
 function endGame(){
@@ -168,5 +176,10 @@ function playerScore(){
 		document.getElementById('playerinput').value = '';
 	}
 
+}
+function enter_score(){
+	newGame();
+	winningScore = document.getElementById('playerinput').value;
+	document.getElementById('winningscore').innerHTML = `First to ${winningScore} wins.`
 }
 newGame();
