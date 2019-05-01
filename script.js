@@ -96,6 +96,12 @@ const new_game = ()=>{
 
 	document.querySelector('.rolldice').classList.remove = 'hidden';
 	document.querySelector('.hold').classList.remove = 'hidden';
+	
+	document.querySelectorAll('.boxp1')[0].classList.add('playerturn');
+	document.querySelectorAll('.boxp1')[1].classList.add('playerturn');
+
+	document.querySelectorAll('.boxp2')[0].classList.remove('playerturn');
+	document.querySelectorAll('.boxp2')[1].classList.remove('playerturn');
 }
 
 document.querySelector('.rolldice').addEventListener('click', roll_dice);
