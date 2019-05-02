@@ -56,7 +56,9 @@ ul {
 	color:black;
 	width:120px;
 	margin:10px auto 10px auto;
+	cursor:pointer;
 }
+
 li{
 	margin:10px 0 10px 0;
 	text-align:left;
