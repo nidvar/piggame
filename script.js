@@ -1,9 +1,4 @@
-let score = 0;
-let player = 1;
-let p1score = 0;
-let p2score = 0;
-
-let winning_score = 100;
+[score, player, p1score, p2score, winning_score] = [0,1,0,0,100];
 
 const custom_winning_score = ()=>{
 	new_game();
@@ -23,7 +18,7 @@ const roll_dice = ()=>{
 	document.querySelector('.dicepicture').src = `images/dice${dice1}.png`
 	document.querySelector('.dicetwo').src = `images/dice${dice2}.png`
 
-	score = score + dice1+dice2;
+	score = score + dice1 + dice2;
 	if(player === 1){
 		document.querySelector('.p1dice').innerHTML = score;
 	}else if(player === 2){
@@ -58,10 +53,10 @@ const change_player = ()=>{
 
 const hold_score = ()=>{
 	if(player === 1){
-		p1score = p1score + score;
+		p1score += score;
 		document.querySelector('.p1score').innerHTML = p1score;
 	}else if(player === 2){
-		p2score = p2score + score;
+		p2score += score;
 		document.querySelector('.p2score').innerHTML = p2score;
 	}
 	change_player();
@@ -119,6 +114,7 @@ const new_game = ()=>{
 
 	document.querySelectorAll('.boxp2')[0].classList.remove('playerturn');
 	document.querySelectorAll('.boxp2')[1].classList.remove('playerturn');
+	document.querySelectorAll('.winningscore')[0].style = 'font-size:1.5em';
 }
 
 document.querySelector('.rolldice').addEventListener('click', roll_dice);
