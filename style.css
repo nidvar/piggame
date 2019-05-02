@@ -50,11 +50,12 @@ ul {
 }
 .rolldice, .hold, .newgame{
 	text-decoration: none;
-	background-color:skyblue;
+	background-color:wheat;
 	padding:4px;
-	border-radius:5px;
-	border:1px solid black;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	color:black;
+	width:120px;
+	margin:10px auto 10px auto;
 }
 li{
 	margin:10px 0 10px 0;
@@ -66,4 +67,5 @@ li{
 }
 .hidden{
 	display:none;
+	background-color:pink;
 }

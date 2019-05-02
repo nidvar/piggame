@@ -74,13 +74,30 @@ const hold_score = ()=>{
 }
 
 const end_game = ()=>{
+
 	if(p1score >= winning_score){
 		alert('player 1 wins');
+		document.querySelectorAll('.winningscore')[0].innerHTML = `PLAYER 1 WINS`;
+		document.querySelectorAll('.winningscore')[0].style = 'font-size:60px'
 	} else if (p2score >= winning_score){
 		alert('player 2 wins');
+		document.querySelectorAll('.winningscore')[0].innerHTML = `PLAYER 2 WINS`;
+		document.querySelectorAll('.winningscore')[0].style = 'font-size:60px'
 	}
-	document.querySelector('.rolldice').classList.add = 'hidden';
-	document.querySelector('.hold').classList.add = 'hidden';
+
+	score = 0;
+	player = 1;
+	p1score = 0;
+	p2score = 0;
+
+	document.querySelectorAll('.boxp1')[0].classList.remove('playerturn');
+	document.querySelectorAll('.boxp1')[1].classList.remove('playerturn');
+
+	document.querySelectorAll('.boxp2')[0].classList.remove('playerturn');
+	document.querySelectorAll('.boxp2')[1].classList.remove('playerturn');
+
+	document.querySelector('.rolldice').classList.add('hidden');
+	document.querySelector('.hold').classList.add('hidden');
 }
 
 const new_game = ()=>{
@@ -88,14 +105,14 @@ const new_game = ()=>{
 	player = 1;
 	p1score = 0;
 	p2score = 0;
-
+	document.querySelectorAll('.winningscore')[0].innerHTML = `First player to ${winning_score} wins`;
 	document.querySelector('.p1score').innerHTML = 0;
 	document.querySelector('.p2score').innerHTML = 0;
 	document.querySelector('.p1dice').innerHTML = 0;
 	document.querySelector('.p2dice').innerHTML = 0;
 
-	document.querySelector('.rolldice').classList.remove = 'hidden';
-	document.querySelector('.hold').classList.remove = 'hidden';
+	document.querySelector('.rolldice').classList.remove('hidden');
+	document.querySelector('.hold').classList.remove('hidden');
 	
 	document.querySelectorAll('.boxp1')[0].classList.add('playerturn');
 	document.querySelectorAll('.boxp1')[1].classList.add('playerturn');
