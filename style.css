@@ -80,3 +80,6 @@ li{
 	display:none;
 	background-color:pink;
 }
+a:link{
+	text-decoration:none;
+}
